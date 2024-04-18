@@ -46,7 +46,7 @@ const MenuItem = (props: MenuItemProps) => {
                   justifyContent: 'center'
                 }}>
                 <Image
-                  src={props?.item.img}
+                  src="/images/Avatar.jpg"
                   width={24}
                   height={24}
                   alt="React"

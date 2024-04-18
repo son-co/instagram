@@ -1,5 +1,5 @@
 'use client';
-import { MUIBox, MUIList, MUIListItem } from '@/components/MUIComponents';
+import { MUIBox, MUIList } from '@/components/MUIComponents';
 import { FC } from 'react';
 import styled from 'styled-components';
 import Logo from '@/public/images/iconMenu/Logo.svg';
