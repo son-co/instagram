@@ -6,7 +6,9 @@ const viJSON = {
   search: 'Tìm kiếm',
   create: 'Tạo',
   seeMore: 'Xem thêm',
-  personalPage: 'Trang cá nhân'
+  personalPage: 'Trang cá nhân',
+  thread: 'Thread',
+  reels: 'Reels'
 };
 
 export default viJSON;

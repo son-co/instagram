@@ -6,7 +6,9 @@ const enJSON = {
   search: 'Search',
   create: 'Create',
   seeMore: 'See more',
-  personalPage: 'Personal page'
+  personalPage: 'Personal page',
+  reels: 'Reels',
+  thread: 'Thread'
 };
 
 export default enJSON;

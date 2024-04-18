@@ -1,5 +1,6 @@
 import './style.css';
 import 'nprogress/nprogress.css';
+import '../src/i18n/i18n';
 
 import type { AppProps } from 'next/app';
 import Head from 'next/head';

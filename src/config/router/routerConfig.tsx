@@ -1,5 +1,7 @@
 export const PATH = {
-  DASHBOARD: '/',
-  DISCOVERY: 'explore',
-  REELS: 'reels'
+  HOME: '/',
+  DISCOVERY: '/explore',
+  REELS: '/reels',
+  MESSAGE: '/message',
+  PROFILE: '/profile'
 };
