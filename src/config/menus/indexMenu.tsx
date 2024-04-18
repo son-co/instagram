@@ -1,13 +1,12 @@
-import Search from '@/public/images/Search.svg';
-import Home from '@/public/images/Home.svg';
-import Discovery from '@/public/images/Discovery.svg';
-import Message from '@/public/images/Message.svg';
-import Reels from '@/public/images/Reels.svg';
-import Notification from '@/public/images/Notification.svg';
-import Create from '@/public/images/Create.svg';
-import Thread from '@/public/images/Threads.svg';
-import More from '@/public/images/More.svg';
-import Personal from '@/public/images/avt11.jpg';
+import Search from '@/public/images/iconMenu/Search.svg';
+import Home from '@/public/images/iconMenu/Home.svg';
+import Discovery from '@/public/images/iconMenu/Discovery.svg';
+import Message from '@/public/images/iconMenu/Message.svg';
+import Reels from '@/public/images/iconMenu/Reels.svg';
+import Notification from '@/public/images/iconMenu/Notification.svg';
+import Create from '@/public/images/iconMenu/Create.svg';
+import Thread from '@/public/images/iconMenu/Threads.svg';
+import More from '@/public/images/iconMenu/More.svg';
 
 import { Trans } from 'react-i18next';
 import { PATH } from '../router/routerConfig';

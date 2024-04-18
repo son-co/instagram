@@ -2,7 +2,7 @@
 import { MUIBox, MUIList, MUIListItem } from '@/components/MUIComponents';
 import { FC } from 'react';
 import styled from 'styled-components';
-import Logo from '@/public/images/Logo.svg';
+import Logo from '@/public/images/iconMenu/Logo.svg';
 import SVG from 'react-inlinesvg';
 import { indexMenu, footerMenu } from '@/config/menus/indexMenu';
 import MenuItem from '@/components/MenuItem';
