@@ -7,6 +7,7 @@ const viJSON = {
   create: 'Tạo',
   seeMore: 'Xem thêm',
   personalPage: 'Trang cá nhân',
+  thread: 'Thread',
   reels: 'Reels'
 };
 

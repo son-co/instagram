@@ -7,7 +7,8 @@ const enJSON = {
   create: 'Create',
   seeMore: 'See more',
   personalPage: 'Personal page',
-  reels: 'Reels'
+  reels: 'Reels',
+  thread: 'Thread'
 };
 
 export default enJSON;

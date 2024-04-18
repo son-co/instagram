@@ -4,11 +4,11 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import Logo from '@/public/images/Logo.svg';
 import SVG from 'react-inlinesvg';
-import { indexMenu } from '@/config/menus/indexMenu';
+import { indexMenu, footerMenu } from '@/config/menus/indexMenu';
 import MenuItem from '@/components/MenuItem';
 
 const NavbarStyle = styled.div`
-  width: 224px;
+  width: 244px;
   height: 100vh;
   border-right: 1px solid #ccc;
   padding: 8px 12px 20px;
@@ -34,7 +34,13 @@ const Navbar: FC = () => {
             ))}
           </MUIList>
         </MUIBox>
-        <MUIBox>footer</MUIBox>
+        <MUIBox>
+          <MUIList>
+            {footerMenu.map((item, index) => (
+              <MenuItem key={index} item={item} />
+            ))}
+          </MUIList>
+        </MUIBox>
       </NavbarStyle>
     </>
   );
