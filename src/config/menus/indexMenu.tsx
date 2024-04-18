@@ -7,7 +7,7 @@ import Notification from '@/public/images/iconMenu/Notification.svg';
 import Create from '@/public/images/iconMenu/Create.svg';
 import Thread from '@/public/images/iconMenu/Threads.svg';
 import More from '@/public/images/iconMenu/More.svg';
-import Person from '@/public/images/Avatar.jpg';
+// import Person from '@/public/images/Avatar.jpg';
 
 import { Trans } from 'react-i18next';
 import { PATH } from '../router/routerConfig';
@@ -50,7 +50,7 @@ export const indexMenu = [
   },
   {
     title: <Trans i18nKey="personalPage" />,
-    img: Person,
+    img: true,
     path: PATH.PROFILE
   }
 ];

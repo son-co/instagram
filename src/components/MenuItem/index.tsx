@@ -47,11 +47,14 @@ const MenuItem = (props: MenuItemProps) => {
                 }}>
                 <Image
                   src="/images/Avatar.jpg"
-                  width={24}
-                  height={24}
+                  priority
+                  width={0}
+                  height={0}
                   alt="React"
                   style={{
-                    borderRadius: '50%'
+                    borderRadius: '50%',
+                    height: '24px !important',
+                    width: '24px !important'
                   }}
                 />
               </MUIListItemIcon>
