@@ -1,6 +1,8 @@
 import MUIBox from './MUIBox';
+import MUIButton from './MUIButton';
 import MUICard from './MUICard';
 import MUIGrid from './MUIGrid';
+import MUIIconButton from './MUIIconButton';
 import MUIList from './MUIList';
 import MUIListItem from './MUIListItem';
 import MUIListItemIcon from './MUIListItemIcon';
@@ -15,5 +17,7 @@ export {
   MUIGrid,
   MUIListItemButton,
   MUITypography,
-  MUIListItemIcon
+  MUIListItemIcon,
+  MUIButton,
+  MUIIconButton
 };

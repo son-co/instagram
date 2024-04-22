@@ -12,6 +12,7 @@ import { useRouter } from 'next/router';
 
 interface MenuItemProps {
   item?: any;
+  isExpand?: boolean;
 }
 const MenuItem = (props: MenuItemProps) => {
   const router = useRouter();
@@ -21,7 +22,11 @@ const MenuItem = (props: MenuItemProps) => {
       <Link href={props?.item.path}>
         <MUIListItem sx={{ px: 0 }}>
           <MUIListItemButton
-            sx={{ px: 0, borderRadius: '10px' }}
+            sx={{
+              px: 0,
+              borderRadius: '10px',
+              justifyContent: props.isExpand ? '' : 'center'
+            }}
             selected={router.asPath === props?.item.path}
             className="!bg-transparent">
             {props?.item?.icon && (
@@ -32,8 +37,8 @@ const MenuItem = (props: MenuItemProps) => {
                   title="React"
                   style={
                     router.asPath === props?.item.path
-                      ? { color: 'black' }
-                      : { color: 'normal' }
+                      ? { color: 'red' }
+                      : { color: 'black' }
                   }
                 />
               </MUIListItemIcon>
@@ -50,7 +55,7 @@ const MenuItem = (props: MenuItemProps) => {
                   priority
                   width={0}
                   height={0}
-                  alt="React"
+                  alt="icon"
                   style={{
                     borderRadius: '50%',
                     height: '24px !important',
@@ -60,11 +65,11 @@ const MenuItem = (props: MenuItemProps) => {
               </MUIListItemIcon>
             )}
             <MUITypography
-              sx={
-                router.asPath === props?.item.path
-                  ? { fontWeight: 'bold' }
-                  : { fontWeight: 'normal' }
-              }>
+              sx={{
+                fontWeight:
+                  router.asPath === props?.item.path ? 'bold' : 'normal',
+                display: props?.isExpand ? 'block' : 'none'
+              }}>
               {props?.item.title}
             </MUITypography>
           </MUIListItemButton>
