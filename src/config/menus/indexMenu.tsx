@@ -7,41 +7,56 @@ import Notification from '@/public/images/iconMenu/Notification.svg';
 import Create from '@/public/images/iconMenu/Create.svg';
 import Thread from '@/public/images/iconMenu/Threads.svg';
 import More from '@/public/images/iconMenu/More.svg';
+
+import SearchActive from '@/public/images/iconMenu/active/Search.svg';
+import HomeActive from '@/public/images/iconMenu/active/Home.svg';
+import DiscoveryActive from '@/public/images/iconMenu/active/Discovery.svg';
+import MessageActive from '@/public/images/iconMenu/active/Message.svg';
+import ReelsActive from '@/public/images/iconMenu/active/Reels.svg';
+import NotificationActive from '@/public/images/iconMenu/active/Notification.svg';
+
 // import Person from '@/public/images/Avatar.jpg';
 
 import { Trans } from 'react-i18next';
 import { PATH } from '../router/routerConfig';
+import { COLORS_MENU_POST_ACTION } from '../style';
 
 export const indexMenu = [
   {
     title: <Trans i18nKey="homePage" />,
     icon: Home,
-    path: PATH.HOME
+    path: PATH.HOME,
+    active: HomeActive
   },
   {
     title: <Trans i18nKey="search" />,
     icon: Search,
-    path: ''
+    path: '',
+    active: SearchActive
   },
   {
     title: <Trans i18nKey="discovery" />,
     icon: Discovery,
-    path: PATH.DISCOVERY
+    path: PATH.DISCOVERY,
+    active: DiscoveryActive
   },
   {
     title: <Trans i18nKey="reels" />,
     icon: Reels,
-    path: PATH.REELS
+    path: PATH.REELS,
+    active: ReelsActive
   },
   {
     title: <Trans i18nKey="message" />,
     icon: Message,
-    path: PATH.MESSAGE
+    path: PATH.MESSAGE,
+    active: MessageActive
   },
   {
     title: <Trans i18nKey="notification" />,
     icon: Notification,
-    path: ''
+    path: '',
+    active: NotificationActive
   },
   {
     title: <Trans i18nKey="Create" />,
@@ -65,5 +80,53 @@ export const footerMenu = [
     title: <Trans i18nKey="seeMore" />,
     icon: More,
     path: ''
+  }
+];
+
+export const MenuActionPost = [
+  {
+    title: <Trans i18nKey="report" />,
+    handle: 'report',
+    colors: COLORS_MENU_POST_ACTION
+  },
+  {
+    title: <Trans i18nKey="unfollow" />,
+    handle: 'unfollow',
+    colors: COLORS_MENU_POST_ACTION
+  },
+  {
+    title: <Trans i18nKey="addFavorites" />,
+    handle: 'addFavorites',
+    colors: ''
+  },
+  {
+    title: <Trans i18nKey="goToArticle" />,
+    handle: 'goToArticle',
+    colors: ''
+  },
+  {
+    title: <Trans i18nKey="shareTo" />,
+    handle: 'shareTo',
+    colors: ''
+  },
+  {
+    title: <Trans i18nKey="copyLink" />,
+    handle: 'copyLink',
+    colors: ''
+  },
+  {
+    title: <Trans i18nKey="dip" />,
+    handle: 'dip',
+    colors: ''
+  },
+  {
+    title: <Trans i18nKey="aboutThisAccount" />,
+    handle: 'aboutThisAccount',
+    colors: ''
+  },
+  {
+    title: <Trans i18nKey="cancel" />,
+    handle: 'cancel',
+    colors: ''
   }
 ];

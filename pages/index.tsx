@@ -2,9 +2,9 @@ import Post from '@/components/Home/Post';
 import SectionHome from '@/components/Home/Section';
 import Story from '@/components/Home/Story';
 import { MUIBox, MUIGrid } from '@/components/MUIComponents';
-import { Inter } from 'next/font/google';
+// import { Inter } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+// const inter = Inter({ subsets: ['latin'] });
 const data = [
   {
     username: 'user',
@@ -48,7 +48,13 @@ export default function Home() {
               <Story key={index} data={item} />
             ))}
           </MUIGrid>
-          <MUIBox>
+          <MUIBox
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyItems: 'center',
+              alignItems: 'center'
+            }}>
             <Post />
           </MUIBox>
         </MUIGrid>

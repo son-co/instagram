@@ -2,20 +2,35 @@ import {
   MUIBox,
   MUIButton,
   MUICard,
+  MUIGrid,
   MUIIconButton,
   MUITypography
 } from '@/components/MUIComponents';
 import Image from 'next/image';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { Tooltip } from '@mui/material';
+import { Button, TextField, Tooltip } from '@mui/material';
 import Like from '@/public/images/posts/Like.svg';
 import Comment from '@/public/images/posts/Comment.svg';
 import Share from '@/public/images/posts/Share.svg';
 import Save from '@/public/images/posts/Save.svg';
 import SVG from 'react-inlinesvg';
 import { COLORS_BLACK } from '@/config/style';
+import MUIDialog from '@/components/MUIComponents/MUIDialog';
+import { MenuActionPost } from '@/config/menus/indexMenu';
+import { useState } from 'react';
+import Link from 'next/link';
+import Textarea from '@mui/joy/Textarea';
 
 export default function Post() {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClick = (type: any) => {
+    switch (type) {
+      case 'cancel':
+        setIsOpen(false);
+      default:
+        setIsOpen(false);
+    }
+  };
   return (
     <>
       <MUICard
@@ -49,7 +64,8 @@ export default function Post() {
               '&:hover': {
                 background: 'transparent'
               }
-            }}>
+            }}
+            onClick={() => setIsOpen(true)}>
             <MoreHorizIcon />
           </MUIIconButton>
         </MUIBox>
@@ -117,10 +133,74 @@ export default function Post() {
             có phiền muộn.”
           </span>
         </MUIBox>
-        <MUIButton title="Xem tất cả ">Xem tất cả</MUIButton>
+        <Link href={''}>
+          <MUITypography sx={{ color: '#737373', fontSize: '14px', mt: 1 }}>
+            Xem tất cả 3 bình luận
+          </MUITypography>
+        </Link>
 
-        <MUIBox></MUIBox>
+        <MUIGrid container>
+          <MUIGrid item xs={9}>
+            <Textarea
+              size="sm"
+              placeholder="Thêm bình luận"
+              sx={{
+                width: '100%',
+                border: 'none',
+                outline: 'none',
+                background: 'transparent',
+                '&:focus': {
+                  border: 'none',
+                  outline: 'none'
+                },
+                '&::before': {
+                  content: 'none'
+                }
+              }}
+            />
+          </MUIGrid>
+          <MUIGrid
+            item
+            xs={3}
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center'
+            }}>
+            <MUIButton sx={{ p: 0 }} title="ĐĂNG">
+              Đăng
+            </MUIButton>
+            <MUIBox>icon</MUIBox>
+          </MUIGrid>
+        </MUIGrid>
       </MUICard>
+      <MUIDialog
+        open={isOpen}
+        setOpen={setIsOpen}
+        noTitleDivider={true}
+        maxWidth={'xs'}
+        sx={{ p: 0 }}>
+        <MUICard
+          className="divide-y"
+          sx={{ boxShadow: 'none', border: 'none' }}>
+          {MenuActionPost.map((item, index) => (
+            <MUIBox
+              key={index}
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                minHeight: '48px',
+                color: `${item.colors}`,
+                fontWeight: `${item.colors}` ? '700' : '400',
+                cursor: 'pointer'
+              }}
+              onClick={() => handleClick(item.handle)}>
+              {item.title}
+            </MUIBox>
+          ))}
+        </MUICard>
+      </MUIDialog>
     </>
   );
 }

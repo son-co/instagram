@@ -31,16 +31,11 @@ const MenuItem = (props: MenuItemProps) => {
             className="!bg-transparent">
             {props?.item?.icon && (
               <MUIListItemIcon sx={{ color: '#000' }}>
-                <SVG
-                  src={props?.item.icon}
-                  width="100%"
-                  title="React"
-                  style={
-                    router.asPath === props?.item.path
-                      ? { color: 'red' }
-                      : { color: 'black' }
-                  }
-                />
+                {router.asPath === props?.item.path && props?.item.active ? (
+                  <SVG src={props?.item.active} width="100%" title="icon" />
+                ) : (
+                  <SVG src={props?.item.icon} width="100%" title="icon" />
+                )}
               </MUIListItemIcon>
             )}
             {props?.item?.img && (
