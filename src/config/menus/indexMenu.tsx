@@ -32,7 +32,8 @@ export const indexMenu = [
     title: <Trans i18nKey="search" />,
     icon: Search,
     path: '',
-    active: SearchActive
+    active: SearchActive,
+    isPopup: 'search'
   },
   {
     title: <Trans i18nKey="discovery" />,
@@ -56,12 +57,14 @@ export const indexMenu = [
     title: <Trans i18nKey="notification" />,
     icon: Notification,
     path: '',
-    active: NotificationActive
+    active: NotificationActive,
+    isPopup: 'notification'
   },
   {
-    title: <Trans i18nKey="Create" />,
+    title: <Trans i18nKey="create" />,
     icon: Create,
-    path: ''
+    path: '',
+    isPopup: 'Create'
   },
   {
     title: <Trans i18nKey="personalPage" />,

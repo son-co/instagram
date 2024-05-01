@@ -9,6 +9,8 @@ import {
 import SVG from 'react-inlinesvg';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { GeneralContext } from '@/contexts/generalContext';
+import { useContext } from 'react';
 
 interface MenuItemProps {
   item?: any;
@@ -16,6 +18,15 @@ interface MenuItemProps {
 }
 const MenuItem = (props: MenuItemProps) => {
   const router = useRouter();
+  const { closeSidebar, openSidebar } = useContext(GeneralContext);
+  const handleClick = (key: string) => {
+    if (key === 'search' || key === 'notification') {
+      console.log('bac');
+      closeSidebar();
+    } else {
+      openSidebar();
+    }
+  };
 
   return (
     <>
@@ -27,6 +38,7 @@ const MenuItem = (props: MenuItemProps) => {
               borderRadius: '10px',
               justifyContent: props.isExpand ? '' : 'center'
             }}
+            onClick={() => handleClick(props?.item?.isPopup)}
             selected={router.asPath === props?.item.path}
             className="!bg-transparent">
             {props?.item?.icon && (

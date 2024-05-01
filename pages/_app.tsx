@@ -12,6 +12,7 @@ import { NextPage } from 'next';
 import SidebarLayout from '@/Layouts/SidebarLayout';
 import { Router } from 'next/router';
 import nProgress from 'nprogress';
+import { GeneralProvider } from '@/contexts/generalContext';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -37,14 +38,16 @@ function App(props: Props) {
 
   return (
     <Provider store={store}>
-      <Head>
-        <title>abc</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-      </Head>
-      {getLayout(<Component {...pageProps} />)}
+      <GeneralProvider>
+        <Head>
+          <title>abc</title>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
+        </Head>
+        {getLayout(<Component {...pageProps} />)}
+      </GeneralProvider>
     </Provider>
   );
 }
