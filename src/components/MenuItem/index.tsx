@@ -9,33 +9,45 @@ import {
 import SVG from 'react-inlinesvg';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { GeneralContext } from '@/contexts/generalContext';
+import { useContext } from 'react';
 
 interface MenuItemProps {
   item?: any;
+  isExpand?: boolean;
 }
 const MenuItem = (props: MenuItemProps) => {
   const router = useRouter();
+  const { closeSidebar, openSidebar } = useContext(GeneralContext);
+  const handleClick = (key: string) => {
+    if (key === 'search' || key === 'notification') {
+      console.log('bac');
+      closeSidebar();
+    } else {
+      openSidebar();
+    }
+  };
 
   return (
     <>
       <Link href={props?.item.path}>
         <MUIListItem sx={{ px: 0 }}>
           <MUIListItemButton
-            sx={{ px: 0, borderRadius: '10px' }}
+            sx={{
+              px: 0,
+              borderRadius: '10px',
+              justifyContent: props.isExpand ? '' : 'center'
+            }}
+            onClick={() => handleClick(props?.item?.isPopup)}
             selected={router.asPath === props?.item.path}
             className="!bg-transparent">
             {props?.item?.icon && (
               <MUIListItemIcon sx={{ color: '#000' }}>
-                <SVG
-                  src={props?.item.icon}
-                  width="100%"
-                  title="React"
-                  style={
-                    router.asPath === props?.item.path
-                      ? { color: 'black' }
-                      : { color: 'normal' }
-                  }
-                />
+                {router.asPath === props?.item.path && props?.item.active ? (
+                  <SVG src={props?.item.active} width="100%" title="icon" />
+                ) : (
+                  <SVG src={props?.item.icon} width="100%" title="icon" />
+                )}
               </MUIListItemIcon>
             )}
             {props?.item?.img && (
@@ -50,7 +62,7 @@ const MenuItem = (props: MenuItemProps) => {
                   priority
                   width={0}
                   height={0}
-                  alt="React"
+                  alt="icon"
                   style={{
                     borderRadius: '50%',
                     height: '24px !important',
@@ -60,11 +72,11 @@ const MenuItem = (props: MenuItemProps) => {
               </MUIListItemIcon>
             )}
             <MUITypography
-              sx={
-                router.asPath === props?.item.path
-                  ? { fontWeight: 'bold' }
-                  : { fontWeight: 'normal' }
-              }>
+              sx={{
+                fontWeight:
+                  router.asPath === props?.item.path ? 'bold' : 'normal',
+                display: props?.isExpand ? 'block' : 'none'
+              }}>
               {props?.item.title}
             </MUITypography>
           </MUIListItemButton>

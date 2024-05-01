@@ -1,37 +1,38 @@
 import Post from '@/components/Home/Post';
+import SectionHome from '@/components/Home/Section';
 import Story from '@/components/Home/Story';
-import { MUIGrid } from '@/components/MUIComponents';
-import { Inter } from 'next/font/google';
+import { MUIBox, MUIGrid } from '@/components/MUIComponents';
+// import { Inter } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+// const inter = Inter({ subsets: ['latin'] });
 const data = [
   {
-    username: 'afgfgbc',
+    username: 'user',
     image: '/images/Avatar.jpg',
     path: ''
   },
   {
-    username: 'gfggg',
+    username: 'user',
     image: '/images/Avatar.jpg',
     path: ''
   },
   {
-    username: 'jfgjt',
+    username: 'user',
     image: '/images/Avatar.jpg',
     path: ''
   },
   {
-    username: 'afgdgdbc',
+    username: 'user',
     image: '/images/Avatar.jpg',
     path: ''
   },
   {
-    username: 'adfgdfbc',
+    username: 'user',
     image: '/images/Avatar.jpg',
     path: ''
   },
   {
-    username: 'abdfc',
+    username: 'user',
     image: '/images/Avatar.jpg',
     path: ''
   }
@@ -47,6 +48,15 @@ export default function Home() {
               <Story key={index} data={item} />
             ))}
           </MUIGrid>
+          <MUIBox
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyItems: 'center',
+              alignItems: 'center'
+            }}>
+            <Post />
+          </MUIBox>
         </MUIGrid>
         <MUIGrid
           item
@@ -56,7 +66,7 @@ export default function Home() {
             maxWidth: '319px !important',
             display: { xs: 'none', sm: 'none', md: 'block' }
           }}>
-          <Post />
+          <SectionHome />
         </MUIGrid>
       </MUIGrid>
     </>

@@ -13,27 +13,37 @@ interface StoryProps {
 }
 const Story = (props: StoryProps) => {
   return (
-    <>
-      <MUIGrid item>
-        <MUICard
+    <MUIGrid item>
+      <MUICard
+        sx={{
+          boxShadow: 'none',
+          border: 'none',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'start'
+        }}>
+        <MUIBox
           sx={{
-            boxShadow: 'none',
-            border: 'none',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center'
+            border: '1px solid transparent',
+            padding: '2px',
+            borderRadius: '50%',
+            backgroundImage:
+              'linear-gradient(to right top, #ffc805, #ff0b67,#e152d8,#ff0b67)'
           }}>
           <MUIBox
             sx={{
-              border: '2px solid #000',
               padding: '2px',
-              borderRadius: '50%'
+              background: '#fff',
+              borderRadius: '50%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
             }}>
             <Image
               src={props.data.image}
-              width={0}
-              height={0}
+              width={56}
+              height={56}
               priority
               style={{
                 borderRadius: '50%',
@@ -43,12 +53,12 @@ const Story = (props: StoryProps) => {
               alt="avt"
             />
           </MUIBox>
-          <MUIBox>
-            <MUITypography>{props.data.username}</MUITypography>
-          </MUIBox>
-        </MUICard>
-      </MUIGrid>
-    </>
+        </MUIBox>
+        <MUIBox>
+          <MUITypography>{props.data.username}</MUITypography>
+        </MUIBox>
+      </MUICard>
+    </MUIGrid>
   );
 };
 
