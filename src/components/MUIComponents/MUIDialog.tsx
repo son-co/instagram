@@ -37,9 +37,12 @@ const MUIDialog = (props: MUIDialogProps) => {
         onClick={handleClick}
         aria-labelledby="customized-dialog-title"
         open={props.open}>
-        <DialogTitle sx={{ m: 0, p: 0 }} id="customized-dialog-title">
-          {props.title}
-        </DialogTitle>
+        {props.title && (
+          <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+            {props.title}
+          </DialogTitle>
+        )}
+
         {props.isButton && (
           <MUIIconButton
             aria-label="close"

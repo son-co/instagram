@@ -30,7 +30,7 @@ const Navbar: FC = () => {
     <>
       <MUIBox
         sx={{
-          width: isExpand ? WIDTH_NAVBAR_COLLAPSE : WIDTH_NAVBAR_EXPAND
+          minWidth: isExpand ? WIDTH_NAVBAR_COLLAPSE : WIDTH_NAVBAR_EXPAND
         }}
       />
       <NavbarStyle
@@ -39,11 +39,11 @@ const Navbar: FC = () => {
           borderRadius: '0px !important',
           width: isExpand ? WIDTH_NAVBAR_COLLAPSE : WIDTH_NAVBAR_EXPAND
         }}>
-        <MUIBox
+        {/* <MUIBox
           sx={{
             width: isExpand ? WIDTH_NAVBAR_COLLAPSE : WIDTH_NAVBAR_EXPAND
           }}
-        />
+        /> */}
         <MUIBox
           sx={{
             height: '92px',

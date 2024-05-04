@@ -3,5 +3,6 @@ export const PATH = {
   DISCOVERY: '/explore',
   REELS: '/reels',
   MESSAGE: '/message',
-  PROFILE: '/profile'
+  PROFILE: '/profile',
+  SIGNIN: '/sign-in'
 };
