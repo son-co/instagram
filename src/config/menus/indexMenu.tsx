@@ -64,7 +64,7 @@ export const indexMenu = [
     title: <Trans i18nKey="create" />,
     icon: Create,
     path: '',
-    isPopup: 'Create'
+    isPopup: 'create'
   },
   {
     title: <Trans i18nKey="personalPage" />,
