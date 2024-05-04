@@ -12,7 +12,7 @@ import { TextField } from '@mui/material';
 import Link from 'next/link';
 import { PATH } from '@/config/router/routerConfig';
 
-const SignIn = () => {
+const SignUp = () => {
   const dispatch = useDispatch();
   return (
     <MUICard>
@@ -37,6 +37,8 @@ const SignIn = () => {
           <MUIBox sx={{ border: '1px solid', p: 1 }}>
             <Formik
               initialValues={{
+                fullname: '',
+                username: '',
                 email: '',
                 password: ''
               }}
@@ -47,6 +49,16 @@ const SignIn = () => {
                 return (
                   <form onSubmit={handleSubmit}>
                     <TextField
+                      name="fullname"
+                      sx={{ width: '100%', my: 1 }}
+                      label="Fullname"
+                      variant="outlined"
+                      size="small"
+                      onChange={val => {
+                        handleChange('fullname')(val);
+                      }}
+                    />
+                    <TextField
                       name="email"
                       sx={{ width: '100%', my: 1 }}
                       label="Email"
@@ -56,7 +68,16 @@ const SignIn = () => {
                         handleChange('email')(val);
                       }}
                     />
-
+                    <TextField
+                      name="username"
+                      sx={{ width: '100%', my: 1 }}
+                      label="Username"
+                      variant="outlined"
+                      size="small"
+                      onChange={val => {
+                        handleChange('username')(val);
+                      }}
+                    />
                     <TextField
                       name="password"
                       type="password"
@@ -68,10 +89,10 @@ const SignIn = () => {
                         handleChange('password')(val);
                       }}
                     />
-                    <MUIButton type="submit">Sign In</MUIButton>
+                    <MUIButton type="submit">Sign Up</MUIButton>
                     <MUITypography>
-                      Do not have an accounts? Register{' '}
-                      <Link href={PATH.SIGNUP}>
+                      Already have access? Login{' '}
+                      <Link href={PATH.SIGNIN}>
                         <strong>here</strong>
                       </Link>
                     </MUITypography>
@@ -86,8 +107,8 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
 
-SignIn.getLayout = function getLayout(page: ReactElement) {
+SignUp.getLayout = function getLayout(page: ReactElement) {
   return <>{page}</>;
 };
