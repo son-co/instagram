@@ -4,5 +4,6 @@ export const PATH = {
   REELS: '/reels',
   MESSAGE: '/message',
   PROFILE: '/profile',
-  SIGNIN: '/sign-in'
+  SIGNIN: '/sign-in',
+  SIGNUP: '/sign-up'
 };
