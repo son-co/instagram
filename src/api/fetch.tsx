@@ -58,7 +58,7 @@ function startFetch(
         message: 'requestApiTimeout',
         localizeMessage: 'requestApiTimeout'
       });
-    }, 30000); //time out in 30s
+    }, 30000);
     let paramsString = '';
     Object.keys(params).map((m, i) => {
       if (params[m]?.toString())

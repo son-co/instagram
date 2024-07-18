@@ -11,7 +11,7 @@ class Users extends Model
 
   protected $table = 'users';
   protected $fillable = [
-    'name',
+    'username',
     'fullname',
     'email',
     'password'
@@ -37,8 +37,23 @@ class Users extends Model
     return $this->hasMany(Favorites::class);
   }
 
-  public function follower()
+  // public function follower()
+  // {
+  //   return $this->hasMany(Followers::class);
+  // }
+
+  public function followers()
   {
-    return $this->hasMany(Followers::class);
+    return $this->belongsToMany(Users::class, 'followers', 'following_id', 'follower_id')->withTimestamps();
+  }
+
+  public function followings()
+  {
+    return $this->belongsToMany(Users::class, 'followers', 'follower_id', 'following_id')->withTimestamps();
+  }
+
+  public function profile()
+  {
+    return $this->belongsTo(Profile::class);
   }
 }

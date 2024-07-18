@@ -40,11 +40,8 @@ const Story = (props: StoryProps) => {
               justifyContent: 'center',
               alignItems: 'center'
             }}>
-            <Image
+            <img
               src={props.data.image}
-              width={56}
-              height={56}
-              priority
               style={{
                 borderRadius: '50%',
                 height: '56px !important',
