@@ -23,14 +23,12 @@ const Account = () => {
             gap: '10px'
           }}>
           <MUIBox>
-            <Image
+            <img
               src="/images/Avatar.jpg"
-              width={44}
-              height={44}
               style={{
                 borderRadius: '50%',
-                height: '44px !important',
-                width: '44px !important'
+                height: '44px',
+                width: '44px'
               }}
               alt="avt"
             />

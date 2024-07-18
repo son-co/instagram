@@ -60,11 +60,8 @@ const MenuItem = (props: MenuItemProps) => {
                   display: 'flex',
                   justifyContent: 'center'
                 }}>
-                <Image
+                <img
                   src="/images/Avatar.jpg"
-                  priority
-                  width={0}
-                  height={0}
                   alt="icon"
                   style={{
                     borderRadius: '50%',

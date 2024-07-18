@@ -7,13 +7,17 @@ import {
 } from '@/components/MUIComponents';
 import { ReactElement } from 'react';
 import { Formik } from 'formik';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from '@/store';
+import { store } from '@/store';
 import { TextField } from '@mui/material';
 import Link from 'next/link';
 import { PATH } from '@/config/router/routerConfig';
+import { loginUser } from '@/slices/auth/authThunk';
+import { useRouter } from 'next/router';
 
 const SignIn = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const router = useRouter();
   return (
     <MUICard>
       <MUIGrid
@@ -38,10 +42,27 @@ const SignIn = () => {
             <Formik
               initialValues={{
                 email: '',
-                password: ''
+                password: '',
+                submit: null
               }}
               onSubmit={(values, helpers) => {
-                console.log(values, 'abc');
+                store
+                  .dispatch(
+                    loginUser({
+                      email: values.email,
+                      password: values.password
+                    })
+                  )
+                  .unwrap()
+                  .then(() => {
+                    router.push(PATH.HOME);
+                  })
+                  .catch(err => {
+                    helpers.setStatus({ success: false });
+                    helpers.setErrors({ submit: err.message });
+                    helpers.setSubmitting(false);
+                  })
+                  .finally(() => {});
               }}>
               {({ handleSubmit, handleChange }) => {
                 return (
