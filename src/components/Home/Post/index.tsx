@@ -43,14 +43,12 @@ export default function Post() {
         }}>
         <MUIBox className="flex justify-between items-center">
           <MUIBox className="flex justify-start items-center gap-2">
-            <Image
+            <img
               src="/images/Avatar.jpg"
-              width={32}
-              height={32}
               style={{
                 borderRadius: '50%',
-                height: '32px !important',
-                width: '32px !important'
+                height: '32px',
+                width: '32px'
               }}
               alt="avt"
             />
@@ -70,10 +68,8 @@ export default function Post() {
           </MUIIconButton>
         </MUIBox>
         <MUIBox sx={{ mt: 1 }} className="w-full">
-          <Image
+          <img
             src="/images/Avatar.jpg"
-            width={0}
-            height={0}
             style={{
               width: '100% ',
               height: '100% ',

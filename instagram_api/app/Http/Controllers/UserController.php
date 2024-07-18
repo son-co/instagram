@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -54,7 +56,7 @@ class UserController extends Controller
             'password' => 'required|min:8',
         ]);
 
-        $user = new User();
+        $user = new Users();
         $user->fullname = $validatedData['fullname'];
         $user->username = $validatedData['username'];
         $user->email = $validatedData['email'];
@@ -63,7 +65,9 @@ class UserController extends Controller
 
         $user->save();
 
-        $user->save();
+        $profile = new Profile();
+        $profile->user_id = $user->id;
+        $profile->save();
 
         return response()->json([
             'success' => true,
@@ -75,13 +79,15 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $user = Users::where('email', $request->email)->where('password', $request->password)->first();
-        // $token = $user->createToken('authToken')->plainTextToken;
         if ($user) {
+            $data = DB::table('users')
+                ->join('profile', 'users.id', '=', 'profile.user_id')
+                ->get();
+
             return response()->json([
                 'success' => true,
                 'message' => 'Login successfully',
-                'user' => $user,
-                // 'token' => $token,
+                'user' => $data,
             ], 200);
         } else {
             return response()->json([
@@ -89,6 +95,5 @@ class UserController extends Controller
                 'message' => 'Invalid email or password',
             ], 401);
         }
-
     }
 }

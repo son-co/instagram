@@ -13,9 +13,11 @@ import { TextField } from '@mui/material';
 import Link from 'next/link';
 import { PATH } from '@/config/router/routerConfig';
 import { loginUser } from '@/slices/auth/authThunk';
+import { useRouter } from 'next/router';
 
 const SignIn = () => {
   // const dispatch = useDispatch();
+  const router = useRouter();
   return (
     <MUICard>
       <MUIGrid
@@ -53,7 +55,7 @@ const SignIn = () => {
                   )
                   .unwrap()
                   .then(() => {
-                    console.log('oke gòi');
+                    router.push(PATH.HOME);
                   })
                   .catch(err => {
                     helpers.setStatus({ success: false });

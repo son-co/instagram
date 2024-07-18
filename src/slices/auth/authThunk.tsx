@@ -22,9 +22,11 @@ export const loginUser = createAsyncThunk(
         email: body.email,
         password: body.password
       })
-        .then(res => {
+        .then((res: any) => {
           // store.dispatch(login(res.content.id_token));
-          console.log('signin', res);
+          if (res.content.success) {
+            localStorage.setItem('user', JSON.stringify(res.content.user));
+          }
         })
         .catch((error: unknown) => {
           return thunkAPI.rejectWithValue(error);

@@ -6,5 +6,5 @@ export const rootReducerName = {
 };
 
 export const rootReducer = combineReducers({
-  [rootReducerName.auth]: AuthReducer
+  [rootReducerName.auth]: AuthReducer.reducer
 });
