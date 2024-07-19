@@ -13,13 +13,21 @@ import Link from 'next/link';
 import { PATH } from '@/config/router/routerConfig';
 import Logo from '@/public/images/iconMenu/Logo.svg';
 import SVG from 'react-inlinesvg';
-import { COLOR_AUTH_BORDER, COLOR_AUTH_BUTTON } from '@/config/style';
+import { COLOR_AUTH_BORDER, COLOR_DISABLED_BUTTON, COLOR_ERROR_MESSAGE } from '@/config/style';
+import * as Yup from 'yup';
 
 const SignUp = () => {
   // const dispatch = useDispatch();
 
   const [backgroundIndex, setBackgroundIndex] = useState<number>(0)
   
+  const errorMessage = Yup.object().shape({
+    fullname: Yup.string().required('Required'),
+    username: Yup.string().required('Required'),
+    email: Yup.string().email('Invalid email').required('Required'),
+    password: Yup.string().min(8, 'Password must greater than 8 characters').required('Required'),
+  });
+
   useEffect(() => {
     setTimeout(() => {
       if(backgroundIndex === 3) setBackgroundIndex(0)
@@ -39,7 +47,7 @@ const SignUp = () => {
           alignItems: 'center',
           height: '100vh',
         }}>
-        <MUIGrid item xs={4}>
+        <MUIGrid item xs={4} className="max-lg:hidden">
           <MUIBox
             sx={{
               backgroundImage: `url(/images/auth/home-phones.png)`,
@@ -70,7 +78,7 @@ const SignUp = () => {
               </MUIBox> */}
             </MUIBox>
         </MUIGrid>
-        <MUIGrid item xs={4}>
+        <MUIGrid item xs={10} sm={8}  md={6} lg={4} xl={4}>
           <MUIBox sx={{ border: `1px solid ${COLOR_AUTH_BORDER}`, mx: 2 }}>
           <MUIBox
               sx={{
@@ -89,12 +97,13 @@ const SignUp = () => {
                 fullname: '',
                 username: '',
                 email: '',
-                password: ''
+                password: '',
               }}
+              validationSchema = {errorMessage}
               onSubmit={(values, helpers) => {
-                console.log(values, 'abc');
+                console.log(values, helpers);
               }}>
-              {({ handleSubmit, handleChange }) => {
+              {({ handleSubmit, handleChange, errors }) => {
                 return (
                   <form onSubmit={handleSubmit}>
                     <MUIBox sx={{display:'flex', alignItems:'center', flexDirection:'column'}}>
@@ -108,6 +117,12 @@ const SignUp = () => {
                           handleChange('fullname')(val);
                         }}
                       />
+                      {errors.fullname && (
+                        <MUIBox sx={{textAlign:'left', width:'80%', mb:1}}>
+                          <MUITypography sx={{fontSize: '14px', color: `${COLOR_ERROR_MESSAGE}`}}>*{errors.fullname}</MUITypography>
+                        </MUIBox>
+                      )}
+
                       <TextField
                         name="email"
                         sx={{ width: '80%', my: 1 }}
@@ -117,7 +132,15 @@ const SignUp = () => {
                         onChange={val => {
                           handleChange('email')(val);
                         }}
+                        
                       />
+
+                      {errors.email && (
+                        <MUIBox sx={{textAlign:'left', width:'80%', mb:1}}>
+                          <MUITypography sx={{fontSize: '14px', color: `${COLOR_ERROR_MESSAGE}`}}>*{errors.email}</MUITypography>
+                        </MUIBox>
+                      )}
+                       
                       <TextField
                         name="username"
                         sx={{ width: '80%'}}
@@ -128,6 +151,12 @@ const SignUp = () => {
                           handleChange('username')(val);
                         }}
                       />
+                      {errors.username && (
+                        <MUIBox sx={{textAlign:'left', width:'80%', mb:1}}>
+                          <MUITypography sx={{fontSize: '14px', color: `${COLOR_ERROR_MESSAGE}`}}>*{errors.username}</MUITypography>
+                        </MUIBox>
+                      )}
+
                       <TextField
                         name="password"
                         type="password"
@@ -138,13 +167,22 @@ const SignUp = () => {
                         onChange={val => {
                           handleChange('password')(val);
                         }}
+                        
                       />
-                      <MUIButton  sx={{width: '80%', 
-                            background: COLOR_AUTH_BUTTON, 
-                            borderRadius:'8px', 
-                            color:'white',
-                            my:1
-                            }} type="submit">Sign Up</MUIButton>
+                      {errors.password && (
+                        <MUIBox sx={{textAlign:'left', width:'80%', mb:1}}>
+                          <MUITypography sx={{fontSize: '14px', color: `${COLOR_ERROR_MESSAGE}`}}>*{errors.password}</MUITypography>
+                        </MUIBox>
+                      )}
+
+                      <MUIButton sx={{width: '80%', 
+                                      borderRadius: '8px',
+                                    }} 
+                                // disabled={errors.disabled === undefined ? true : errors.disabled ? true : false} 
+                                variant="contained" 
+                                type="submit">
+                                  Sign Up
+                      </MUIButton>
                     </MUIBox>
                   </form>
                 );
@@ -158,7 +196,7 @@ const SignUp = () => {
 
               Already have access? Login{' '}
                 
-                  <MUITypography sx={{display:'inline', fontWeight:'bold', color: COLOR_AUTH_BUTTON}}>
+                  <MUITypography sx={{display:'inline', fontWeight:'bold', color: COLOR_DISABLED_BUTTON}}>
                     <Link href={PATH.SIGNIN}>
                       here
                     </Link>
