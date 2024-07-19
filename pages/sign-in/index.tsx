@@ -16,14 +16,14 @@ import { loginUser } from '@/slices/auth/authThunk';
 import { useRouter } from 'next/router';
 import Logo from '@/public/images/iconMenu/Logo.svg';
 import SVG from 'react-inlinesvg';
-import { COLOR_AUTH_BUTTON, COLOR_AUTH_BORDER } from '@/config/style';
+import { COLOR_DISABLED_BUTTON, COLOR_AUTH_BORDER} from '@/config/style';
 
 const SignIn = () => {
   // const dispatch = useDispatch();
   const router = useRouter();
 
   const [backgroundIndex, setBackgroundIndex] = useState<number>(0)
-  
+
   useEffect(() => {
     setTimeout(() => {
       if(backgroundIndex === 3) setBackgroundIndex(0)
@@ -42,9 +42,10 @@ const SignIn = () => {
         sx={{
           justifyContent: 'center',
           alignItems: 'center',
-          height: '100vh'
+          height: '100vh',
+          overflow: 'scroll'
         }}>
-        <MUIGrid item xs={4}>
+        <MUIGrid item xs={4} className="max-lg:hidden">
           <MUIBox
             sx={{
               backgroundImage: `url(/images/auth/home-phones.png)`,
@@ -69,7 +70,7 @@ const SignIn = () => {
               </MUIBox>
             </MUIBox>
         </MUIGrid>
-        <MUIGrid item xs={4}>
+        <MUIGrid item xs={10} sm={8}  md={6} lg={4} xl={4}>
           <MUIBox sx={{ border: `1px solid ${COLOR_AUTH_BORDER}`, mx: 2 }}>
             <MUIBox
               sx={{
@@ -87,8 +88,10 @@ const SignIn = () => {
               initialValues={{
                 email: '',
                 password: '',
+                disabled: true,
                 submit: null
               }}
+
               onSubmit={(values, helpers) => {
                 store
                   .dispatch(
@@ -108,7 +111,7 @@ const SignIn = () => {
                   })
                   .finally(() => { });
               } }>
-              {({ handleSubmit, handleChange }) => {
+              {({ handleSubmit, handleChange, errors }) => {
                 return (
                   <form onSubmit={handleSubmit}>
                     <MUIBox sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
@@ -132,16 +135,14 @@ const SignIn = () => {
                         onChange={val => {
                           handleChange('password')(val);
                         } } />
-
-
+                      
                       <MUIButton
                         sx={{
                           width: '80%',
-                          background: COLOR_AUTH_BUTTON,
                           borderRadius: '8px',
-                          color: 'white',
                           my: 1
                         }}
+                        variant="contained" 
                         type="submit">
                         Sign In
                       </MUIButton>
@@ -157,7 +158,7 @@ const SignIn = () => {
             textAlign: 'center'
           }}>
               Do not have an accounts? Register{' '}
-              <MUITypography sx={{ display: 'inline', fontWeight: 'bold', color: COLOR_AUTH_BUTTON }}>
+              <MUITypography sx={{ display: 'inline', fontWeight: 'bold', color: COLOR_DISABLED_BUTTON }}>
                 <Link href={PATH.SIGNUP}>
                   here
                 </Link>
