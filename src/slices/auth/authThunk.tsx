@@ -1,6 +1,6 @@
 'use client';
 
-import { loginApi } from '@/api/auth/action';
+import { loginApi, registerApi } from '@/api/auth/action';
 import { removeCookie } from '@/api/session';
 import { JWT } from '@/config';
 import { store } from '@/store';
@@ -48,3 +48,36 @@ export const logOutUser = createAsyncThunk(
     }
   }
 );
+
+export const registerUser = createAsyncThunk(
+  'register/registerUser',
+  async (
+    body: {
+      fullname: string;
+      username: string
+      email: string;
+      password: string;
+    },
+    thunkAPI
+  ) => {
+    try {
+      return registerApi({
+        fullname: body.fullname,
+        username: body.username,
+        email: body.email,
+        password: body.password
+      })
+        .then((res: any) => {
+          // store.dispatch(login(res.content.id_token));
+          if (res.content.success) {
+            localStorage.setItem('user', JSON.stringify(res.content.user));
+          }
+        })
+        .catch((error: unknown) => {
+          return thunkAPI.rejectWithValue(error);
+        });
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+)

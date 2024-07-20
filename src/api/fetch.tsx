@@ -151,7 +151,7 @@ function handleResponse({
       });
       break;
     case 401:
-      store.dispatch(logOutUser());
+      // store.dispatch(logOutUser());
       onReject({
         status: httpResponseCode,
         message: responseJson?.message || '',

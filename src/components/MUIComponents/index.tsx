@@ -10,6 +10,7 @@ import MUITypography from './MUITypography';
 import MUIListItemButton from './MUListItemButton';
 import MUIDialog from './MUIDialog';
 import MUIDrawer from './MUIDrawer';
+import MUIAlert from './MUIAlert';
 
 export {
   MUIBox,
@@ -23,5 +24,6 @@ export {
   MUIButton,
   MUIIconButton,
   MUIDialog,
-  MUIDrawer
+  MUIDrawer,
+  MUIAlert
 };
