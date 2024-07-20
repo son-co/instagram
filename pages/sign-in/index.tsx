@@ -3,7 +3,8 @@ import {
   MUIButton,
   MUICard,
   MUIGrid,
-  MUITypography
+  MUITypography,
+  MUIAlert
 } from '@/components/MUIComponents';
 import { ReactElement, useState, useEffect } from 'react';
 import { Formik } from 'formik';
@@ -22,6 +23,12 @@ const SignIn = () => {
   // const dispatch = useDispatch();
   const router = useRouter();
 
+  const [alert, setAlert] = useState<{state: string, message: string}>
+  ({
+    state: '',
+    message: ''
+  })
+
   const [backgroundIndex, setBackgroundIndex] = useState<number>(0)
 
   useEffect(() => {
@@ -37,6 +44,25 @@ const SignIn = () => {
   return (
     <>
       {/* <MUICard> */}
+      {alert.state && alert.message &&(
+        <MUIBox sx={{
+          width:'100%',
+          position:'fixed',
+          top:20,
+          zIndex:1,
+          display:'flex',
+          justifyContent:'center'
+        }} >
+          <MUIAlert sx={{
+            fontSize:18,
+            display:'flex',
+            alignItems:'center'
+          }}
+          severity= {alert.state === 'success' ? alert.state: 'error'}>
+            {alert.message}
+          </MUIAlert>
+      </MUIBox>
+      )}
       <MUIGrid
         container
         sx={{
@@ -88,7 +114,6 @@ const SignIn = () => {
               initialValues={{
                 email: '',
                 password: '',
-                disabled: true,
                 submit: null
               }}
 
@@ -102,16 +127,28 @@ const SignIn = () => {
                   )
                   .unwrap()
                   .then(() => {
+                    setAlert({
+                      state:'success',
+                      message:'Login successfully!'
+                    })
                     router.push(PATH.HOME);
                   })
                   .catch(err => {
+                    setAlert({
+                      state:'error',
+                      message:'Unauthorized!'
+                    })
+                    setTimeout(()=> setAlert({
+                        state:'',
+                        message:''
+                    }), 2500)
                     helpers.setStatus({ success: false });
                     helpers.setErrors({ submit: err.message });
                     helpers.setSubmitting(false);
                   })
                   .finally(() => { });
               } }>
-              {({ handleSubmit, handleChange, errors }) => {
+              {({ handleSubmit, handleChange}) => {
                 return (
                   <form onSubmit={handleSubmit}>
                     <MUIBox sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
@@ -140,7 +177,7 @@ const SignIn = () => {
                         sx={{
                           width: '80%',
                           borderRadius: '8px',
-                          my: 1
+                          mb:2
                         }}
                         variant="contained" 
                         type="submit">

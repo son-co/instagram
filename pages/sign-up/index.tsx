@@ -3,10 +3,14 @@ import {
   MUIButton,
   MUICard,
   MUIGrid,
-  MUITypography
+  MUITypography,
+  MUIAlert,
 } from '@/components/MUIComponents';
 import { ReactElement, useState, useEffect } from 'react';
-import { Formik } from 'formik';
+import { useFormik } from 'formik';
+import { store } from '@/store';
+import { useRouter } from 'next/router';
+import { registerUser } from '@/slices/auth/authThunk';
 import { useDispatch } from 'react-redux';
 import { TextField } from '@mui/material';
 import Link from 'next/link';
@@ -18,15 +22,69 @@ import * as Yup from 'yup';
 
 const SignUp = () => {
   // const dispatch = useDispatch();
+  const router = useRouter()
 
   const [backgroundIndex, setBackgroundIndex] = useState<number>(0)
-  
+  const [alert, setAlert] = useState<{state: string, message:string}>({
+    state: '',
+    message: '',
+  })
+
   const errorMessage = Yup.object().shape({
-    fullname: Yup.string().required('Required'),
-    username: Yup.string().required('Required'),
+    fullname: Yup.string().max(255, 'Maximum 255 characters').required('Required'),
+    username: Yup.string()
+                .matches(/^[\S]*$/,'Must not have spaces')
+                .max(255, 'Maximum 255 characters')
+                .required('Required'),
     email: Yup.string().email('Invalid email').required('Required'),
-    password: Yup.string().min(8, 'Password must greater than 8 characters').required('Required'),
+    password: Yup.string()
+                .matches(/^[\S]*$/, 'Must not have spaces')
+                .min(8, 'Password must greater than 8 characters')
+                .required('Required'),
   });
+
+  const myForm = useFormik({
+    initialValues: {
+      fullname: '',
+      username: '',
+      email: '',
+      password: '',
+      submit: null,
+    },
+    validationSchema: errorMessage,
+    onSubmit: (values, helpers) => {
+      store
+      .dispatch(
+        registerUser({
+          fullname: values.fullname,
+          username: values.username,
+          email: values.email,
+          password: values.password
+        })
+      )
+      .unwrap()
+      .then(() => {
+        setAlert({
+          state: 'success',
+          message: 'Register Successfully!'
+        })
+        router.push(PATH.HOME);
+      })
+      .catch(err => {
+        setAlert({
+          state:'error',
+          message:'Invalid Register Information!'
+        })
+        setTimeout(()=> setAlert({
+          state:'',
+          message:''
+        }),2500)
+        helpers.setStatus({ success: false });
+        helpers.setErrors({ submit: err.message });
+        helpers.setSubmitting(false);
+      })
+      .finally(() => { })
+    }})
 
   useEffect(() => {
     setTimeout(() => {
@@ -37,9 +95,31 @@ const SignUp = () => {
       }
     }, 5000)
   }, [backgroundIndex])
+
   return (
     <>
     {/* <MUICard> */}
+
+      {alert.state && alert.message &&(
+        <MUIBox sx={{
+          width:'100%',
+          position:'fixed',
+          top:10,
+          zIndex:1,
+          display:'flex',
+          justifyContent:'center'
+        }} >
+          <MUIAlert sx={{
+            fontSize:20,
+            display:'flex',
+            alignItems:'center'
+          }}
+          severity= {alert.state === 'success' ? 'success' : 'error'}>
+            {alert.message}
+          </MUIAlert>
+      </MUIBox>
+      )}
+    
       <MUIGrid
         container
         sx={{
@@ -86,97 +166,70 @@ const SignUp = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                p: 5
+                p: 4
               }}>
           
               <SVG src={Logo} width="100%" height="51px" title="Logo" />
         
             </MUIBox>
-            <Formik
-              initialValues={{
-                fullname: '',
-                username: '',
-                email: '',
-                password: '',
-              }}
-              validationSchema = {errorMessage}
-              onSubmit={(values, helpers) => {
-                console.log(values, helpers);
-              }}>
-              {({ handleSubmit, handleChange, errors }) => {
-                return (
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={myForm.handleSubmit}>
                     <MUIBox sx={{display:'flex', alignItems:'center', flexDirection:'column'}}>
                       <TextField
+                        id="fullname"
                         name="fullname"
                         sx={{ width: '80%'}}
                         label="Fullname"
                         variant="outlined"
                         size="small"
-                        onChange={val => {
-                          handleChange('fullname')(val);
-                        }}
+                        onBlur={myForm.handleBlur}
+                        onChange={myForm.handleChange}
+                        error={myForm.touched.fullname && Boolean(myForm.errors.fullname)}
+                        helperText={myForm.touched.fullname && myForm.errors.fullname}
                       />
-                      {errors.fullname && (
-                        <MUIBox sx={{textAlign:'left', width:'80%', mb:1}}>
-                          <MUITypography sx={{fontSize: '14px', color: `${COLOR_ERROR_MESSAGE}`}}>*{errors.fullname}</MUITypography>
-                        </MUIBox>
-                      )}
-
+                    
                       <TextField
+                        id="email"
                         name="email"
                         sx={{ width: '80%', my: 1 }}
                         label="Email"
                         variant="outlined"
                         size="small"
-                        onChange={val => {
-                          handleChange('email')(val);
-                        }}
-                        
+                        onBlur={myForm.handleBlur}
+                        onChange={myForm.handleChange}
+                        error={myForm.touched.email && Boolean(myForm.errors.email)}
+                        helperText={myForm.touched.email && myForm.errors.email}
                       />
 
-                      {errors.email && (
-                        <MUIBox sx={{textAlign:'left', width:'80%', mb:1}}>
-                          <MUITypography sx={{fontSize: '14px', color: `${COLOR_ERROR_MESSAGE}`}}>*{errors.email}</MUITypography>
-                        </MUIBox>
-                      )}
-                       
                       <TextField
+                        id="username"
                         name="username"
                         sx={{ width: '80%'}}
                         label="Username"
                         variant="outlined"
                         size="small"
-                        onChange={val => {
-                          handleChange('username')(val);
-                        }}
+                        onBlur={myForm.handleBlur}
+                        onChange={myForm.handleChange}
+                        error={myForm.touched.username && Boolean(myForm.errors.username)}
+                        helperText={myForm.touched.username && myForm.errors.username}
                       />
-                      {errors.username && (
-                        <MUIBox sx={{textAlign:'left', width:'80%', mb:1}}>
-                          <MUITypography sx={{fontSize: '14px', color: `${COLOR_ERROR_MESSAGE}`}}>*{errors.username}</MUITypography>
-                        </MUIBox>
-                      )}
-
+                    
                       <TextField
+                        id="password"
                         name="password"
                         type="password"
                         sx={{ width: '80%', my: 1}}
                         label="Password"
                         variant="outlined"
                         size="small"
-                        onChange={val => {
-                          handleChange('password')(val);
-                        }}
-                        
+                        onBlur={myForm.handleBlur}
+                        onChange={myForm.handleChange}
+                        error={myForm.touched.password && Boolean(myForm.errors.password)}
+                        helperText={myForm.touched.password && myForm.errors.password}
                       />
-                      {errors.password && (
-                        <MUIBox sx={{textAlign:'left', width:'80%', mb:1}}>
-                          <MUITypography sx={{fontSize: '14px', color: `${COLOR_ERROR_MESSAGE}`}}>*{errors.password}</MUITypography>
-                        </MUIBox>
-                      )}
-
+              
                       <MUIButton sx={{width: '80%', 
                                       borderRadius: '8px',
+                                      mb:2
                                     }} 
                                 // disabled={errors.disabled === undefined ? true : errors.disabled ? true : false} 
                                 variant="contained" 
@@ -185,9 +238,6 @@ const SignUp = () => {
                       </MUIButton>
                     </MUIBox>
                   </form>
-                );
-              }}
-            </Formik>
           </MUIBox>
           <MUIBox sx={{ 
                 border: `1px solid ${COLOR_AUTH_BORDER}`, 
