@@ -10,6 +10,8 @@ type GeneralContext = {
   openSidebar: () => void;
   menuState: boolean;
   setMenuState: React.Dispatch<React.SetStateAction<boolean>>;
+  contentSidebarItem: string;
+  setContentSidebarItem: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const GeneralContext = createContext<GeneralContext>(
@@ -24,6 +26,9 @@ export function GeneralProvider({ children }: Props) {
   const [isExpand, setisExpand] = useState(false);
   const [isCreatePost, setIsCreatePost] = useState(false);
   const [menuState, setMenuState] = useState<boolean>(true); // state menu on full size screen
+
+  const [contentSidebarItem, setContentSidebarItem] = useState('home'); // Expand content from sidebar item
+
   const toggleSidebar = () => {
     setisExpand(!isExpand);
   };
@@ -55,7 +60,9 @@ export function GeneralProvider({ children }: Props) {
         openSidebar,
         toggleCreatePost,
         isCreatePost,
-        setIsCreatePost
+        setIsCreatePost,
+        contentSidebarItem,
+        setContentSidebarItem,
       }}>
       {children}
     </GeneralContext.Provider>

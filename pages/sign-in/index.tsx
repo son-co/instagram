@@ -17,7 +17,7 @@ import { loginUser } from '@/slices/auth/authThunk';
 import { useRouter } from 'next/router';
 import Logo from '@/public/images/iconMenu/Logo.svg';
 import SVG from 'react-inlinesvg';
-import { COLOR_DISABLED_BUTTON, COLOR_AUTH_BORDER} from '@/config/style';
+import {COLOR_AUTH_BORDER, COLOR_WATER} from '@/config/style';
 
 const SignIn = () => {
   // const dispatch = useDispatch();
@@ -195,7 +195,7 @@ const SignIn = () => {
             textAlign: 'center'
           }}>
               Do not have an accounts? Register{' '}
-              <MUITypography sx={{ display: 'inline', fontWeight: 'bold', color: COLOR_DISABLED_BUTTON }}>
+              <MUITypography sx={{ display: 'inline', fontWeight: 'bold', color: COLOR_WATER }}>
                 <Link href={PATH.SIGNUP}>
                   here
                 </Link>

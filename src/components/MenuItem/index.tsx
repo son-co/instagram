@@ -18,11 +18,12 @@ interface MenuItemProps {
 }
 const MenuItem = (props: MenuItemProps) => {
   const router = useRouter();
-  const { closeSidebar, openSidebar, toggleCreatePost } =
+  const { closeSidebar, openSidebar, toggleCreatePost, contentSidebarItem, setContentSidebarItem } =
     useContext(GeneralContext);
+    
   const handleClick = (key: string) => {
-    if (key === 'search' || key === 'notification') {
-      console.log('bac');
+    if (key === 'search' || key === 'notification' || key === 'more') {
+      setContentSidebarItem(key)
       closeSidebar();
     } else if (key === 'create') {
       toggleCreatePost();
