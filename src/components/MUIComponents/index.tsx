@@ -11,6 +11,9 @@ import MUIListItemButton from './MUListItemButton';
 import MUIDialog from './MUIDialog';
 import MUIDrawer from './MUIDrawer';
 import MUIAlert from './MUIAlert';
+import MUIListItemText from './MUIListItemText'
+import MUIMenu from './MUIMenu';
+import MUIMenuItem from './MUIMenuItem';
 
 export {
   MUIBox,
@@ -25,5 +28,8 @@ export {
   MUIIconButton,
   MUIDialog,
   MUIDrawer,
-  MUIAlert
+  MUIAlert,
+  MUIListItemText,
+  MUIMenu,
+  MUIMenuItem
 };

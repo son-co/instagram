@@ -74,15 +74,16 @@ export const indexMenu = [
 ];
 
 export const footerMenu = [
-  {
-    title: <Trans i18nKey="thread" />,
-    icon: Thread,
-    path: ''
-  },
+  // {
+  //   title: <Trans i18nKey="thread" />,
+  //   icon: Thread,
+  //   path: ''
+  // },
   {
     title: <Trans i18nKey="seeMore" />,
     icon: More,
-    path: ''
+    path: '',
+    isPopup: 'more',
   }
 ];
 

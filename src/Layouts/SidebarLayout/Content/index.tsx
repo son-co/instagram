@@ -2,6 +2,8 @@ import { FC, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { MUICard } from '@/components/MUIComponents';
 import Search from '@/components/Home/Search';
+import Notification from '@/components/Home/Notification';
+import More from '@/components/Home/More';
 
 interface ContentProps {
   children?: ReactNode;
@@ -13,6 +15,8 @@ const Content: FC<ContentProps> = ({ children }) => {
         {children}
       </MUICard>
       <Search />
+      <Notification />
+      <More />
     </>
   );
 };

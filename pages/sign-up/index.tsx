@@ -17,7 +17,7 @@ import Link from 'next/link';
 import { PATH } from '@/config/router/routerConfig';
 import Logo from '@/public/images/iconMenu/Logo.svg';
 import SVG from 'react-inlinesvg';
-import { COLOR_AUTH_BORDER, COLOR_DISABLED_BUTTON, COLOR_ERROR_MESSAGE } from '@/config/style';
+import { COLOR_AUTH_BORDER, COLOR_WATER} from '@/config/style';
 import * as Yup from 'yup';
 
 const SignUp = () => {
@@ -246,7 +246,7 @@ const SignUp = () => {
 
               Already have access? Login{' '}
                 
-                  <MUITypography sx={{display:'inline', fontWeight:'bold', color: COLOR_DISABLED_BUTTON}}>
+                  <MUITypography sx={{display:'inline', fontWeight:'bold', color: COLOR_WATER}}>
                     <Link href={PATH.SIGNIN}>
                       here
                     </Link>

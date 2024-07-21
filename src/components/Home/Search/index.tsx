@@ -5,11 +5,11 @@ import { Divider, TextField } from '@mui/material';
 import { useContext } from 'react';
 
 const Search = () => {
-  const { isExpand, toggleSidebar } = useContext(GeneralContext);
+  const { isExpand, toggleSidebar, contentSidebarItem } = useContext(GeneralContext);
   return (
     <>
       <MUIDrawer
-        open={isExpand}
+        open={isExpand && contentSidebarItem === 'search'}
         onClose={toggleSidebar}
         sx={{
           overflow: 'hidden',
