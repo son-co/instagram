@@ -14,6 +14,9 @@ import MUIAlert from './MUIAlert';
 import MUIListItemText from './MUIListItemText'
 import MUIMenu from './MUIMenu';
 import MUIMenuItem from './MUIMenuItem';
+import MUIPaper from './MUIPaper';
+import MUIBottomNavigation from './MUIBottomNavigation';
+import MUIBottomNavigationAction from './MUIBottomNavigationAction';
 
 export {
   MUIBox,
@@ -31,5 +34,8 @@ export {
   MUIAlert,
   MUIListItemText,
   MUIMenu,
-  MUIMenuItem
+  MUIMenuItem,
+  MUIPaper,
+  MUIBottomNavigation,
+  MUIBottomNavigationAction
 };

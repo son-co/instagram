@@ -1,7 +1,10 @@
 'use client';
 import { FC, ReactNode, useContext } from 'react';
+import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
-import Navbar from '@/Layouts/SidebarLayout/Navbar';
+
+const Navbar = dynamic(() => import('@/Layouts/SidebarLayout/Navbar'),{ssr: false})
+
 import Content from '@/Layouts/SidebarLayout/Content';
 import CreatePost from '@/components/createPost';
 import { GeneralContext } from '@/contexts/generalContext';

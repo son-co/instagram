@@ -21,7 +21,7 @@ const Story = (props: StoryProps) => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: 'start'
+          justifyContent: 'center'
         }}>
         <MUIBox
           sx={{
@@ -38,15 +38,15 @@ const Story = (props: StoryProps) => {
               borderRadius: '50%',
               display: 'flex',
               justifyContent: 'center',
-              alignItems: 'center'
+              alignItems: 'center',
+              'img':{
+                height: '56px !important',
+                width: '56px !important',
+                borderRadius: '50%',
+              }
             }}>
             <img
               src={props.data.image}
-              style={{
-                borderRadius: '50%',
-                height: '56px !important',
-                width: '56px !important'
-              }}
               alt="avt"
             />
           </MUIBox>
