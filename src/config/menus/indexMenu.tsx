@@ -26,7 +26,7 @@ export const indexMenu = [
     title: <Trans i18nKey="homePage" />,
     icon: Home,
     path: PATH.HOME,
-    active: HomeActive
+    active: HomeActive,
   },
   {
     title: <Trans i18nKey="search" />,
@@ -66,11 +66,11 @@ export const indexMenu = [
     path: '',
     isPopup: 'create'
   },
-  {
-    title: <Trans i18nKey="personalPage" />,
-    img: true,
-    path: PATH.PROFILE
-  }
+  // {
+  //   title: <Trans i18nKey="personalPage" />,
+  //   img: true,
+  //   path: PATH.PROFILE
+  // }
 ];
 
 export const footerMenu = [

@@ -4,7 +4,11 @@ import {
     MUIListItem, 
     MUIListItemButton,
     MUIListItemIcon,
-    MUIListItemText
+    MUIListItemText,
+    MUIMenu,
+    MUIMenuItem,
+    MUIButton,
+    MUITypography
 } from '@/components/MUIComponents';
 
 import { COLOR_BORDER_CARD, WIDTH_NAVBAR_COLLAPSE } from '@/config/style';
@@ -13,7 +17,7 @@ import { Divider, TextField } from '@mui/material';
 import { useContext } from 'react';
 import { logOutUser } from '@/slices/auth/authThunk';
 import { store } from '@/store';
-
+import { COLOR_AUTH_BORDER } from '@/config/style';
 
 import SVG from 'react-inlinesvg'
 import Option from '@/public/images/profile/Option.svg'
@@ -24,12 +28,127 @@ import Theme from '@/public/images/iconMenu/Theme.svg'
 import Threads from '@/public/images/iconMenu/Threads.svg'
 
 const More = () => {
-  const { isExpand, toggleSidebar, contentSidebarItem } = useContext(GeneralContext);
+  const { isExpand, toggleSidebar, contentSidebarItem, anchorEl } = useContext(GeneralContext);
   return (
     <>
-      {contentSidebarItem === 'more' && (
+     <MUIMenu
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={toggleSidebar}
+        sx={{
+            top: -20,
+            left: 50,
+            '.MuiPaper-root':{
+                width: '250px !important',
+                borderRadius: '10px !important'
+            },
+            '.MuiButtonBase-root':{
+                p:2
+            }
+        }}
+      >
+        <MUIMenuItem>
+            <MUIBox sx={{
+                
+                display: 'flex',
+                alignItems:'center',
+                px:1,
+            }}>
+                <SVG src={Option} color="#000" width="20" title="icon"/> 
+                <MUITypography sx={{mx:2, fontSize:14}}>Cài đặt</MUITypography>
+            </MUIBox>
+        </MUIMenuItem>
+
+        <MUIMenuItem>
+            <MUIBox sx={{
+                
+                display: 'flex',
+                alignItems:'center',
+                px:1
+            }}>
+                <SVG src={Activity} color="#000" width="20" title="icon"/> 
+                <MUITypography sx={{mx:2, fontSize:14}}>Hoạt động của bạn</MUITypography>
+            </MUIBox>
+        </MUIMenuItem>
+        
+        <MUIMenuItem>
+            <MUIBox sx={{
+                
+                display: 'flex',
+                alignItems:'center',
+                px:1
+            }}>
+                <SVG src={Saved} color="#000" width="20" title="icon"/> 
+                <MUITypography sx={{mx:2, fontSize:14}}>Đã lưu</MUITypography>
+            </MUIBox>
+        </MUIMenuItem>
+
+        <MUIMenuItem>
+            <MUIBox sx={{
+                
+                display: 'flex',
+                alignItems:'center',
+                px:1
+            }}>
+                <SVG src={Theme} color="#000" width="20" title="icon"/> 
+                <MUITypography sx={{mx:2, fontSize:14}}>Chuyển chế độ</MUITypography>
+            </MUIBox>
+        </MUIMenuItem>
+
+        <MUIMenuItem>
+            <MUIBox sx={{
+                
+                display: 'flex',
+                alignItems:'center',
+                px:1
+            }}>
+                <SVG src={Report} color="#000" width="20" title="icon"/> 
+                <MUITypography sx={{mx:2, fontSize:14}}>Báo cáo sự cố</MUITypography>
+            </MUIBox>
+        </MUIMenuItem>
+    
+        <MUIMenuItem sx={{
+            borderTop: `8px solid #DBDBDB4D`,
+            borderBottom: `8px solid #DBDBDB4D`
+        }}>
+            <MUIBox sx={{
+                
+                display: 'flex',
+                alignItems:'center',
+                px:1
+            }}>
+                <SVG src={Threads} color="#000" width="20" title="icon"/> 
+                <MUITypography sx={{mx:2, fontSize:14}}>Threads</MUITypography>
+            </MUIBox>
+        </MUIMenuItem>
+    
+        <MUIMenuItem>
+            <MUIBox sx={{
+                
+                display: 'flex',
+                alignItems:'center',
+                px:1
+            }}>
+                <MUITypography sx={{fontSize:14}}>Chuyển tài khoản</MUITypography>
+            </MUIBox>
+        </MUIMenuItem>
+            
+        <MUIMenuItem onClick={() => store.dispatch(logOutUser())}>
+            <MUIBox sx={{
+                
+                display: 'flex',
+                alignItems:'center',
+                px:1
+            }}>
+                <MUITypography sx={{fontSize:14}}>Đăng xuất</MUITypography>
+            </MUIBox>
+        </MUIMenuItem>
+      </MUIMenu>
+      {/* {contentSidebarItem === 'more' && (
         <MUIBox sx={{
-            width: 266,
+            
             boxShadow:'2px 2px 10px grey',
             borderRadius: 4,
             position:'fixed',
@@ -103,7 +222,7 @@ const More = () => {
             </MUIList>
         </MUIBox>
      
-      )}
+      )} */}
     </>
   );
 };

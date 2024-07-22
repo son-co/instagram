@@ -12,6 +12,8 @@ type GeneralContext = {
   setMenuState: React.Dispatch<React.SetStateAction<boolean>>;
   contentSidebarItem: string;
   setContentSidebarItem: React.Dispatch<React.SetStateAction<string>>;
+  anchorEl: null | HTMLElement,
+  setAnchorEl: React.Dispatch<React.SetStateAction<null | HTMLElement>>
 };
 
 export const GeneralContext = createContext<GeneralContext>(
@@ -27,10 +29,13 @@ export function GeneralProvider({ children }: Props) {
   const [isCreatePost, setIsCreatePost] = useState(false);
   const [menuState, setMenuState] = useState<boolean>(true); // state menu on full size screen
 
-  const [contentSidebarItem, setContentSidebarItem] = useState('home'); // Expand content from sidebar item
+  const [contentSidebarItem, setContentSidebarItem] = useState('/'); // Expand content from sidebar item
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
   const toggleSidebar = () => {
     setisExpand(!isExpand);
+    setAnchorEl(null)
   };
 
   const toggleCreatePost = () => {
@@ -63,6 +68,8 @@ export function GeneralProvider({ children }: Props) {
         setIsCreatePost,
         contentSidebarItem,
         setContentSidebarItem,
+        anchorEl,
+        setAnchorEl,
       }}>
       {children}
     </GeneralContext.Provider>

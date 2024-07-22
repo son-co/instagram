@@ -43,7 +43,7 @@ export default function Home() {
     <>
       <MUIGrid container sx={{ justifyContent: 'center', mt: 3 }}>
         <MUIGrid item xs={12} md={8} sx={{ maxWidth: '630px !important' }}>
-          <MUIGrid container spacing={2}>
+          <MUIGrid container spacing={2} sx={{px:5}}>
             {data.map((item, index) => (
               <Story key={index} data={item} />
             ))}
