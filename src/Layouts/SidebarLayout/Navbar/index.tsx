@@ -16,8 +16,6 @@ import LogoIcon from '@/public/images/iconMenu/LogoIcon.svg';
 import SVG from 'react-inlinesvg';
 import { indexMenu, footerMenu } from '@/config/menus/indexMenu';
 import MenuItem from '@/components/MenuItem';
-import SendIcon from '@mui/icons-material/Send'
-
 
 import {
   WIDTH_NAVBAR_EXPAND,
@@ -44,6 +42,8 @@ const Navbar: FC = () => {
 
   // Navbar must be lazy load (use dynamic function) to use window object when component mounted
   const [width, setWidth] = useState<number>(window.innerWidth)
+
+  const bottomItems = indexMenu.filter((item) => item.bottomNav)
 
   useEffect(()=>{
     const handleResize = () => {
@@ -104,7 +104,8 @@ const Navbar: FC = () => {
       ):(
         <>
           <TopNav/>
-          <BottomNav />
+          {bottomItems && (<BottomNav listIndex={bottomItems} />)}
+          {/* <BottomNav /> */}
        </>
       )
     }

@@ -16,7 +16,7 @@ const Content: FC<ContentProps> = ({ children }) => {
       </MUICard>
       <Search />
       <Notification />
-      <More />
+      <More/>
     </>
   );
 };

@@ -67,16 +67,16 @@ const MenuItem = (props: MenuItemProps) => {
                   sx={{
                     color: '#000',
                     display: 'flex',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    'img':{
+                      borderRadius: '50%',
+                      height: '24px !important',
+                      width: '24px !important'
+                    }
                   }}>
                   <img
                     src="/images/Avatar.jpg"
                     alt="icon"
-                    style={{
-                      borderRadius: '50%',
-                      height: '24px !important',
-                      width: '24px !important'
-                    }}
                   />
                 </MUIListItemIcon>
               )}
