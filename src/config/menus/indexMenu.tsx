@@ -27,6 +27,7 @@ export const indexMenu = [
     icon: Home,
     path: PATH.HOME,
     active: HomeActive,
+    bottomNav: true
   },
   {
     title: <Trans i18nKey="search" />,
@@ -39,38 +40,43 @@ export const indexMenu = [
     title: <Trans i18nKey="discovery" />,
     icon: Discovery,
     path: PATH.DISCOVERY,
-    active: DiscoveryActive
+    active: DiscoveryActive,
+    bottomNav: true
   },
   {
     title: <Trans i18nKey="reels" />,
     icon: Reels,
     path: PATH.REELS,
-    active: ReelsActive
+    active: ReelsActive,
+    bottomNav: true
   },
   {
     title: <Trans i18nKey="message" />,
     icon: Message,
     path: PATH.MESSAGE,
-    active: MessageActive
+    active: MessageActive,
+    bottomNav: true
   },
   {
     title: <Trans i18nKey="notification" />,
     icon: Notification,
     path: '',
     active: NotificationActive,
-    isPopup: 'notification'
+    isPopup: 'notification',
   },
   {
     title: <Trans i18nKey="create" />,
     icon: Create,
     path: '',
-    isPopup: 'create'
+    isPopup: 'create',
+    bottomNav: true
   },
-  // {
-  //   title: <Trans i18nKey="personalPage" />,
-  //   img: true,
-  //   path: PATH.PROFILE
-  // }
+  {
+    title: <Trans i18nKey="personalPage" />,
+    img: true,
+    path: PATH.PROFILE,
+    bottomNav: true
+  }
 ];
 
 export const footerMenu = [

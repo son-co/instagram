@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { 
     MUIBox,
     MUIList, 
@@ -8,12 +9,13 @@ import {
     MUIMenu,
     MUIMenuItem,
     MUIButton,
-    MUITypography
+    MUITypography,
+    MUISwitch
 } from '@/components/MUIComponents';
 
 import { COLOR_BORDER_CARD, WIDTH_NAVBAR_COLLAPSE } from '@/config/style';
 import { GeneralContext } from '@/contexts/generalContext';
-import { Divider, TextField } from '@mui/material';
+import { Divider, TextField, Typography } from '@mui/material';
 import { useContext } from 'react';
 import { logOutUser } from '@/slices/auth/authThunk';
 import { store } from '@/store';
@@ -26,12 +28,25 @@ import Saved from '@/public/images/iconMenu/Saved.svg'
 import Report from '@/public/images/iconMenu/Report.svg'
 import Theme from '@/public/images/iconMenu/Theme.svg'
 import Threads from '@/public/images/iconMenu/Threads.svg'
+import ArrowLeft from '@/public/images/iconMenu/ArrowLeft.svg'
 
 const More = () => {
-  const { isExpand, toggleSidebar, contentSidebarItem, anchorEl } = useContext(GeneralContext);
+  const { isExpand, toggleSidebar, anchorEl, setAnchorEl } = useContext(GeneralContext); 
+  const [openThemeMenu, setOpenThemeMenu] = useState<null | HTMLElement>(null)
+
+  const handleOpenThemeMenu = () => {
+    setOpenThemeMenu(anchorEl)
+    setAnchorEl(null)
+  }
+
+  const handleCloseThemeMenu = () => {
+    setAnchorEl(openThemeMenu)
+    setOpenThemeMenu(null)
+  }
+
   return (
     <>
-     <MUIMenu
+     <MUIMenu 
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"
         anchorEl={anchorEl}
@@ -42,11 +57,11 @@ const More = () => {
             left: 50,
             '.MuiPaper-root':{
                 width: '250px !important',
-                borderRadius: '10px !important'
+                borderRadius: '10px !important',
             },
             '.MuiButtonBase-root':{
                 p:2
-            }
+            },
         }}
       >
         <MUIMenuItem>
@@ -87,11 +102,11 @@ const More = () => {
 
         <MUIMenuItem>
             <MUIBox sx={{
-                
                 display: 'flex',
                 alignItems:'center',
                 px:1
-            }}>
+            }}          
+            onClick={handleOpenThemeMenu}>
                 <SVG src={Theme} color="#000" width="20" title="icon"/> 
                 <MUITypography sx={{mx:2, fontSize:14}}>Chuyển chế độ</MUITypography>
             </MUIBox>
@@ -108,7 +123,6 @@ const More = () => {
                 <MUITypography sx={{mx:2, fontSize:14}}>Báo cáo sự cố</MUITypography>
             </MUIBox>
         </MUIMenuItem>
-    
         <MUIMenuItem sx={{
             borderTop: `8px solid #DBDBDB4D`,
             borderBottom: `8px solid #DBDBDB4D`
@@ -223,6 +237,31 @@ const More = () => {
         </MUIBox>
      
       )} */}
+      <MUIMenu 
+        anchorEl={openThemeMenu} 
+        open={Boolean(openThemeMenu)} 
+        sx={{   
+            top: -20,
+            left: 50,
+            '.MuiMenuItem-root':{
+                width: 266,
+                display: 'flex',
+                justifyContent: 'space-around'
+            }
+        }}
+      >
+        <MUIMenuItem onClick={handleCloseThemeMenu}>
+            <SVG src={ArrowLeft} />            
+            <MUITypography>Chuyển chế độ</MUITypography>
+            <SVG src={Theme} />
+        </MUIMenuItem>
+        <MUIMenuItem>
+            <MUITypography>Chế độ tối</MUITypography>
+            <MUISwitch color="default" />
+        </MUIMenuItem>
+        
+
+      </MUIMenu>
     </>
   );
 };

@@ -17,6 +17,7 @@ import MUIMenuItem from './MUIMenuItem';
 import MUIPaper from './MUIPaper';
 import MUIBottomNavigation from './MUIBottomNavigation';
 import MUIBottomNavigationAction from './MUIBottomNavigationAction';
+import MUISwitch from './MUISwitch';
 
 export {
   MUIBox,
@@ -37,5 +38,6 @@ export {
   MUIMenuItem,
   MUIPaper,
   MUIBottomNavigation,
-  MUIBottomNavigationAction
+  MUIBottomNavigationAction,
+  MUISwitch
 };

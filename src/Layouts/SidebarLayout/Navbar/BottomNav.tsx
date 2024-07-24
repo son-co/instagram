@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { 
   MUICard, 
   MUIPaper,
@@ -11,31 +11,54 @@ import { FC, useContext } from 'react';
 import SVG from 'react-inlinesvg'
 import SendIcon from '@mui/icons-material/Send'
 import styled from 'styled-components';
-import Home from '@/public/images/iconMenu/Home.svg';
-import Discovery from '@/public/images/iconMenu/Discovery.svg';
-import Message from '@/public/images/iconMenu/Message.svg';
-import Reels from '@/public/images/iconMenu/Reels.svg';
-import Create from '@/public/images/iconMenu/Create.svg';
+import { useRouter } from 'next/router'
+import { GeneralContext } from '@/contexts/generalContext';
 
-const BottomNav: FC = () => {  
+
+interface MenuProps {
+  listIndex: any
+}
+
+const BottomNav = (props: MenuProps) => {  
+  const router = useRouter()
+  const {setContentSidebarItem} = useContext(GeneralContext)
 
     const ImageStyle = styled.img`
         width: 25px;
         height: 25px;
         border-radius: 50%;
     `
+
+    const changeRoute = (path: string) => {
+      setContentSidebarItem(path)
+      router.push(path)
+    }
   return (
         <>
-            <MUIPaper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 1 }} elevation={3}>
-            <MUIBottomNavigation>
-                <MUIBottomNavigationAction icon={<SVG src={Home} />} />
-                <MUIBottomNavigationAction icon={<SVG src={Discovery} />} />
-                <MUIBottomNavigationAction icon={<SVG src={Message} />} />
-                <MUIBottomNavigationAction icon={<SVG src={Reels} />} />
-                <MUIBottomNavigationAction icon={<SVG src={Create} />} />
-                <MUIBottomNavigationAction icon={<ImageStyle src='/images/Avatar.jpg' alt='' />} />
+          <MUIPaper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 1 }} elevation={3}>
+            <MUIBottomNavigation sx={{
+              '.MuiBottomNavigationAction-root':{
+                minWidth: 'auto'
+              }
+            }}>
+              {props?.listIndex.map((item: any, index: number) => {
+                return(
+
+                    <MUIBottomNavigationAction 
+                      onClick={() => changeRoute(item.path)} 
+                      key={index}
+                      sx={{color: '#000'}} 
+                      icon={item.img ?
+                        <ImageStyle src='/images/Avatar.jpg'/> 
+                        :
+                        router.asPath === item.path && item.active ? <SVG src={item.active}/> : <SVG src={item.icon} />
+                       }
+                    />   
+                ) 
+              })}
+           
             </MUIBottomNavigation>
-            </MUIPaper>
+          </MUIPaper>
        </>
     )
 };
